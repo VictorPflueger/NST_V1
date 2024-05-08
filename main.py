@@ -8,27 +8,21 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 from torchvision.models import vgg19, VGG19_Weights
-import copy
-print(torch.__version__)
-print(torchvision.__version__)
-cuda_available = torch.cuda.is_available()
-
-print("Is CUDA available:", cuda_available)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_default_device(device)
 
 
 # desired size of the output image
-imsize = 256 #if torch.cuda.is_available() else 128  # use small size if no GPU
+imsize = 512 #if torch.cuda.is_available() else 128  # use small size if no GPU
 
 
 
 #resize
-old_style = Image.open('Me11.jpg')
+old_style = Image.open('Style.jpg')
 new_style = old_style.resize((imsize,imsize))
 new_style.save('new_style.jpg')
-old_content = Image.open('MonLis.jpg')
+old_content = Image.open('Me11.jpg')
 new_content = old_content.resize((imsize,imsize))
 new_content.save('new_content.jpg')
 
@@ -114,7 +108,7 @@ class StyleLoss(nn.Module):
         return input
     
 
-cnn = vgg19(weights=VGG19_Weights.DEFAULT).features.eval()
+cnn = vgg19(weights=VGG19_Weights.IMAGENET1K_V1).features.eval()
 
 print("ST1")
 
