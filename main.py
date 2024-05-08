@@ -1,4 +1,5 @@
 import torch
+import torchvision
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -8,7 +9,8 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 from torchvision.models import vgg19, VGG19_Weights
 import copy
-
+print(torch.__version__)
+print(torchvision.__version__)
 cuda_available = torch.cuda.is_available()
 
 print("Is CUDA available:", cuda_available)
