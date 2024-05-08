@@ -9,22 +9,24 @@ import torchvision.transforms as transforms
 from torchvision.models import vgg19, VGG19_Weights
 import copy
 
+cuda_available = torch.cuda.is_available()
 
+print("Is CUDA available:", cuda_available)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_default_device(device)
 
 
 # desired size of the output image
-imsize = 128 if torch.cuda.is_available() else 128  # use small size if no GPU
+imsize = 256 #if torch.cuda.is_available() else 128  # use small size if no GPU
 
 
 
 #resize
-old_style = Image.open('MonLis.jpg')
+old_style = Image.open('Me11.jpg')
 new_style = old_style.resize((imsize,imsize))
 new_style.save('new_style.jpg')
-old_content = Image.open('Me11.jpg')
+old_content = Image.open('MonLis.jpg')
 new_content = old_content.resize((imsize,imsize))
 new_content.save('new_content.jpg')
 
